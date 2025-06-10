@@ -10,7 +10,7 @@ A collection of reusable utilities for building APIs
 
 ```bash
 # Published version
-go get github.com/TalentQL/bedrock@v1.0.6
+go get github.com/TalentQL/bedrock@v0.0.0
 
 # Local development
 git clone github.com/TalentQL/bedrock
