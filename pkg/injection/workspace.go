@@ -1,7 +1,7 @@
 package injection
 
 import (
-	"github.com/TalentQL/bedrock/pkg/util"
+	"github.com/QubelyLabs/bedrock/pkg/util"
 	"github.com/gin-gonic/gin"
 )
 

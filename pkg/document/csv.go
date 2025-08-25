@@ -6,7 +6,7 @@ import (
 	"io"
 	"log"
 
-	"github.com/TalentQL/bedrock/pkg/util"
+	"github.com/QubelyLabs/bedrock/pkg/util"
 )
 
 var (

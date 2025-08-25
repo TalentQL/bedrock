@@ -4,8 +4,8 @@ import (
 	"errors"
 	"log"
 
-	"github.com/TalentQL/bedrock/pkg/injection"
-	"github.com/TalentQL/bedrock/pkg/util"
+	"github.com/QubelyLabs/bedrock/pkg/injection"
+	"github.com/QubelyLabs/bedrock/pkg/util"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"github.com/redis/go-redis/v9"

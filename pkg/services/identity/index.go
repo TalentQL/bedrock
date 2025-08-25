@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/TalentQL/bedrock/pkg/request"
-	"github.com/TalentQL/bedrock/pkg/util"
+	"github.com/QubelyLabs/bedrock/pkg/request"
+	"github.com/QubelyLabs/bedrock/pkg/util"
 )
 
 func Authenticate(method string, url string, headers map[string]string) (bool, util.Object, util.Object, error) {
