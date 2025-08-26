@@ -14,8 +14,18 @@ func SetUser(c *gin.Context, v util.Object) {
 }
 
 func GetUser(c *gin.Context) util.Object {
-	tx := c.MustGet(userContextKey)
+	u, ok := c.Get(userContextKey)
+	if !ok {
+		return nil
+	}
 
-	v := tx.(util.Object)
+	v := u.(util.Object)
+	return v
+}
+
+func MustGetUser(c *gin.Context) util.Object {
+	u := c.MustGet(userContextKey)
+
+	v := u.(util.Object)
 	return v
 }
