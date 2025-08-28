@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/QubelyLabs/bedrock/pkg/db"
+	"github.com/TalentQL/bedrock/pkg/db"
 	"github.com/redis/go-redis/v9"
 )
 

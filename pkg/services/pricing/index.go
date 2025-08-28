@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/QubelyLabs/bedrock/pkg/request"
-	"github.com/QubelyLabs/bedrock/pkg/util"
+	"github.com/TalentQL/bedrock/pkg/request"
+	"github.com/TalentQL/bedrock/pkg/util"
 )
 
 const (

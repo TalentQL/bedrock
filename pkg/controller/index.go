@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/QubelyLabs/bedrock/pkg/contract"
-	"github.com/QubelyLabs/bedrock/pkg/injection"
+	"github.com/TalentQL/bedrock/pkg/contract"
+	"github.com/TalentQL/bedrock/pkg/injection"
 	"github.com/TalentQL/bedrock/pkg/util"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"

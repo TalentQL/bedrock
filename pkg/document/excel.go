@@ -6,7 +6,7 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/QubelyLabs/bedrock/pkg/util"
+	"github.com/TalentQL/bedrock/pkg/util"
 	excel "github.com/xuri/excelize/v2"
 )
 

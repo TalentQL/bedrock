@@ -5,7 +5,7 @@ package cache
 import (
 	"time"
 
-	"github.com/QubelyLabs/bedrock/pkg/contract"
+	"github.com/TalentQL/bedrock/pkg/contract"
 )
 
 func NewDefaultCache() contract.Cacher {

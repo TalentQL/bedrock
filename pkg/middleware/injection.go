@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"github.com/QubelyLabs/bedrock/pkg/injection"
-	"github.com/QubelyLabs/bedrock/pkg/util"
+	"github.com/TalentQL/bedrock/pkg/injection"
+	"github.com/TalentQL/bedrock/pkg/util"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,7 +1,7 @@
 package injection
 
 import (
-	"github.com/QubelyLabs/bedrock/pkg/util"
+	"github.com/TalentQL/bedrock/pkg/util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,8 +14,18 @@ func SetWorkspace(c *gin.Context, v util.Object) {
 }
 
 func GetWorkspace(c *gin.Context) util.Object {
-	tx := c.MustGet(workspaceContextKey)
+	w, ok := c.Get(workspaceContextKey)
+	if !ok {
+		return util.Object{}
+	}
 
-	v := tx.(util.Object)
+	v := w.(util.Object)
+	return v
+}
+
+func MustGetWorkspace(c *gin.Context) util.Object {
+	w := c.MustGet(workspaceContextKey)
+
+	v := w.(util.Object)
 	return v
 }

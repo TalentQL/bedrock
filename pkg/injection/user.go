@@ -1,7 +1,7 @@
 package injection
 
 import (
-	"github.com/QubelyLabs/bedrock/pkg/util"
+	"github.com/TalentQL/bedrock/pkg/util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,7 +16,7 @@ func SetUser(c *gin.Context, v util.Object) {
 func GetUser(c *gin.Context) util.Object {
 	u, ok := c.Get(userContextKey)
 	if !ok {
-		return nil
+		return util.Object{}
 	}
 
 	v := u.(util.Object)

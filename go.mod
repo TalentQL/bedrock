@@ -5,7 +5,6 @@ go 1.22
 toolchain go1.22.9
 
 require (
-	github.com/QubelyLabs/bedrock v1.0.7
 	github.com/getsentry/sentry-go v0.27.0
 	github.com/gin-contrib/timeout v1.0.1
 	github.com/gin-gonic/gin v1.10.0
