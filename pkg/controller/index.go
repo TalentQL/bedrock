@@ -713,14 +713,14 @@ func (ctrl *Controller[E]) buildQuery(c *gin.Context) (string, []any) {
 	}
 
 	user := injection.GetUser(c)
-	userId := user["id"].(string)
+	userId, _ := user["id"].(string)
 
 	workspace := injection.GetWorkspace(c)
-	workspaceId := workspace["id"].(string)
+	workspaceId, _ := workspace["id"].(string)
 
 	scopeQuery, scopeArgs := "", []any{}
 
-	if ctrl.scope != nil {
+	if userId != "" && workspaceId != "" && ctrl.scope != nil {
 		scopeQuery, scopeArgs = ctrl.scope(userId, workspaceId)
 	}
 
