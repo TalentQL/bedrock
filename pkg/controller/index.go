@@ -493,7 +493,7 @@ func (ctrl *Controller[E]) FindMany(c *gin.Context) {
 	perPageStr := c.Query("per_page")
 	perPage, err := strconv.Atoi(perPageStr)
 	if err != nil || perPage <= 0 {
-		perPage = 12
+		perPage = 50
 	}
 
 	offset := (page - 1) * perPage
