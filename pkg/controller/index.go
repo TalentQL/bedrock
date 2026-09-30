@@ -9,6 +9,7 @@ import (
 
 	"github.com/TalentQL/bedrock/pkg/contract"
 	"github.com/TalentQL/bedrock/pkg/injection"
+	"github.com/TalentQL/bedrock/pkg/util"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -274,14 +275,14 @@ func (ctrl *Controller[E]) CreateMany(c *gin.Context) {
 }
 
 func (ctrl *Controller[E]) UpdateOne(c *gin.Context) {
-	entity := new(E)
+	freshEntity := new(E)
 	id := c.Param("id")
-	if data, ok := ctrl.Validate(c, entity); !ok {
+	if data, ok := ctrl.Validate(c, freshEntity); !ok {
 		ctrl.ErrorWithData(c, "Invalid request, check and try again", data)
 		return
 	}
 
-	_, err := ctrl.repository.FindOne(c, []string{}, id)
+	staleEntity, err := ctrl.repository.FindOne(c, []string{}, id)
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			log.Println(err)
@@ -291,6 +292,13 @@ func (ctrl *Controller[E]) UpdateOne(c *gin.Context) {
 
 		log.Println(err)
 		ctrl.ErrorWithCode(c, fmt.Sprintf("Unable to retrieve %v record, try again in a bit", ctrl.name), 500)
+		return
+	}
+
+	entity, err := util.Merge(&staleEntity, freshEntity)
+	if err != nil {
+		log.Println(err)
+		ctrl.Error(c, err.Error())
 		return
 	}
 
@@ -705,14 +713,14 @@ func (ctrl *Controller[E]) buildQuery(c *gin.Context) (string, []any) {
 	}
 
 	user := injection.GetUser(c)
-	userId := user["id"].(string)
+	userId, _ := user["id"].(string)
 
 	workspace := injection.GetWorkspace(c)
-	workspaceId := workspace["id"].(string)
+	workspaceId, _ := workspace["id"].(string)
 
 	scopeQuery, scopeArgs := "", []any{}
 
-	if ctrl.scope != nil {
+	if userId != "" && workspaceId != "" && ctrl.scope != nil {
 		scopeQuery, scopeArgs = ctrl.scope(userId, workspaceId)
 	}
 

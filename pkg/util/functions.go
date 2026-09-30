@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"math/rand"
@@ -606,4 +607,47 @@ func TransformMapForReport(records []map[string]any, template map[string]string)
 	}
 
 	return results
+}
+
+func Merge[T any](dest, src *T) (*T, error) {
+	dv := reflect.ValueOf(dest)
+	sv := reflect.ValueOf(src)
+
+	if dv.Kind() != reflect.Ptr || sv.Kind() != reflect.Ptr {
+		return nil, errors.New("dest and src must be pointers to structs")
+	}
+	dv = dv.Elem()
+	sv = sv.Elem()
+
+	if dv.Kind() != reflect.Struct || sv.Kind() != reflect.Struct {
+		return nil, errors.New("dest and src must be pointers to structs")
+	}
+
+	for i := 0; i < dv.NumField(); i++ {
+		df := dv.Field(i)
+		sf := sv.Field(i)
+
+		// skip unexported
+		if !df.CanSet() {
+			continue
+		}
+
+		switch sf.Kind() {
+		case reflect.Ptr, reflect.Interface, reflect.Slice, reflect.Map:
+			if !sf.IsNil() {
+				df.Set(sf)
+			}
+		default:
+			if !IsZero(sf) {
+				df.Set(sf)
+			}
+		}
+	}
+
+	return dest, nil
+}
+
+func IsZero(v reflect.Value) bool {
+	zero := reflect.Zero(v.Type())
+	return reflect.DeepEqual(v.Interface(), zero.Interface())
 }
