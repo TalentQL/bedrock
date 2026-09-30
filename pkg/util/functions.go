@@ -265,7 +265,7 @@ func ParseUintWithDefault(value string, defaultValue uint64) uint64 {
 
 func MakeFilter(queries url.Values, model any) (map[string]any, uint64, uint64) {
 	page := ParseUintWithDefault(queries.Get("page"), 1)
-	perPage := ParseUintWithDefault(queries.Get("per_page"), 12)
+	perPage := ParseUintWithDefault(queries.Get("per_page"), 50)
 
 	filterType := queries.Get("type")
 	if filterType == "" || !InArray(FilterTypes, filterType) {
